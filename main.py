@@ -2,6 +2,7 @@ import random
 import re
 
 inputData = list()
+outputData = list()
 f = open('text.txt')
 line = f.readline()
 inputData = re.split(', | \n', line)  # массив с элементами
@@ -13,6 +14,7 @@ cache = list()
 
 print('\n LRU\n')
 #LRU
+outputData.append('LRU ')
 oldList = list()
 for i in inputData:
     oldList.clear()
@@ -25,10 +27,11 @@ for i in inputData:
             cache.pop(0)
             cache.append(i)
     if oldList == cache:
-        print('1')
+        outputData.append('1')
     else:
-        print('0')
+        outputData.append('0')
 
+outputData.append('\nMark ')
 print('\n MARK\n')
 #Mark
 oldHash = dict()
@@ -61,10 +64,11 @@ for i in inputData:
                 for j in hash.keys():
                     hash[j] = 0
     if oldHash == hash:
-        print('1')
+        outputData.append('1')
     else:
-        print('0')
+        outputData.append('0')
 
+outputData.append('\nMPI ')
 print('\n MPI \n')
 #  MPI задааем количество элементов в кеш и потом сами распределяем по хот и колд исходя лимита который заранее задем
 hash.clear()
@@ -104,12 +108,13 @@ for i in inputData:
     #print(hash)
     #print(cacheOrder)
     if oldList == cacheOrder:
-        print('1')
+        outputData.append('1')
     else:
-        print('0')
+        outputData.append('0')
 
-
-
+f = open('output.txt', 'w')
+for index in outputData:
+    f.write(index)
 
 
 
